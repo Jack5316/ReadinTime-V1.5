@@ -1,0 +1,160 @@
+{
+  "name": "ReadinTime_Voice",
+  "productName": "ReadinTime_Voice",
+  "description": "Turn pdf storybooks into audiobooks with voice cloning running locally",
+  "author": "ucl_cs",
+  "private": true,
+  "version": "0.0.0",
+  "main": "dist-electron/main.js",
+  "scripts": {
+    "dev": "vite --open=false",
+    "build": "npm run prep:backend && vite build && npm run build:ts:electron && npm run build:electron",
+    "build:frontend": "vite build",
+    "build:electron": "electron-builder",
+    "build:ts:electron": "tsc --project electron/tsconfig.electron.json",
+    "prep:backend": "powershell -ExecutionPolicy Bypass -File ..\\Backend\\scripts\\prepare-electron-backend.ps1",
+    "start:electron": "cross-env ELECTRON_OFFLINE=1 npm run build:frontend && npm run build:ts:electron && electron dist-electron/electron/main.js",
+    "start:electron:dev": "concurrently -n VITE,ELECTRON -c green,magenta --kill-others-on-fail --success first \"npm run dev\" \"npm run start:electron:delayed\"",
+    "start:electron:delayed": "wait-on http://localhost:5173 && cross-env ELECTRON_OFFLINE=0 electron dist-electron/electron/main.js",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
+  },
+  "build": {
+    "appId": "com.ucl_cs.ReadinTime_Voice",
+    "productName": "ReadinTime_Voice",
+    "executableName": "ReadinTime_Voice",
+    "files": [
+      "dist-electron/**/*",
+      "bin/**/*",
+      "resources/**/*",
+      "!resources/Data/**/blobs/**",
+      "!resources/Data/**/refs/**",
+      "!resources/Data/wx_out/**",
+      "!resources/Data/tts_out/**",
+      "!resources/Data/test.wav",
+      "!resources/Data/export_chatterbox_ov.py"
+    ],
+    "asar": true,
+    "asarUnpack": [
+      "bin/**",
+      "resources/**"
+    ],
+    "extraResources": [
+      {
+        "from": "resources",
+        "to": "resources",
+        "filter": [
+          "**/*"
+        ]
+      },
+      {
+        "from": "bin",
+        "to": "bin",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ],
+    "mac": {
+      "identity": null,
+      "target": [
+        "dir"
+      ]
+    },
+    "win": {
+      "target": [
+        {
+          "target": "dir",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "artifactName": "ReadinTime_Voice-${version}-${arch}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": "always",
+      "createStartMenuShortcut": true,
+      "shortcutName": "ReadinTime_Voice",
+      "runAfterFinish": false,
+      "deleteAppDataOnUninstall": true,
+      "artifactName": "ReadinTime_Voice-Setup-${version}-${arch}.${ext}",
+      "uninstallDisplayName": "ReadinTime_Voice",
+      "perMachine": false,
+      "allowElevation": false,
+      "warningsAsErrors": false,
+      "differentialPackage": false,
+      "menuCategory": "ReadinTime_Voice"
+    },
+    "generateUpdatesFilesForAllChannels": false,
+    "directories": {
+      "output": "dist"
+    },
+    "compression": "normal",
+    "removePackageScripts": true,
+    "removePackageKeywords": true,
+    "forceCodeSigning": false
+  },
+  "dependencies": {
+    "@types/app-root-dir": "^0.1.4",
+    "@vitejs/plugin-react": "^4.3.4",
+    "@vitejs/plugin-react-swc": "^3.5.0",
+    "app-root-dir": "^1.0.2",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.4.7",
+    "electron-squirrel-startup": "^1.0.1",
+    "howler": "^2.2.4",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-use-audio-player": "^4.0.2",
+    "vite": "^6.0.3",
+    "vite-plugin-electron": "^0.29.0",
+    "wait-on": "^8.0.2"
+  },
+  "devDependencies": {
+    "@azure/msal-browser": "^3.28.0",
+    "@azure/msal-node": "^2.16.2",
+    "@electron-forge/cli": "^7.6.1",
+    "@electron-forge/maker-deb": "^7.6.1",
+    "@electron-forge/maker-rpm": "^7.6.1",
+    "@electron-forge/maker-squirrel": "^7.6.1",
+    "@electron-forge/maker-zip": "^7.6.1",
+    "@electron-forge/plugin-auto-unpack-natives": "^7.6.1",
+    "@electron-forge/plugin-fuses": "^7.6.1",
+    "@electron/fuses": "^1.8.0",
+    "@eslint/js": "^9.17.0",
+    "@tailwindcss/typography": "^0.5.15",
+    "@types/async-retry": "^1.4.9",
+    "@types/express": "^5.0.0",
+    "@types/howler": "^2.2.12",
+    "@types/node": "^22.10.10",
+    "@types/react": "^18.3.17",
+    "@types/react-dom": "^18.3.5",
+    "@xenova/transformers": "^2.17.2",
+    "autoprefixer": "^10.4.20",
+    "concurrently": "^9.2.0",
+    "daisyui": "^4.12.22",
+    "electron": "^33.3.2",
+    "electron-builder": "^25.1.8",
+    "electron-debug": "^4.1.0",
+    "eslint": "^9.17.0",
+    "eslint-plugin-react-hooks": "^5.0.0",
+    "eslint-plugin-react-refresh": "^0.4.16",
+    "express": "^4.21.2",
+    "globals": "^15.13.0",
+    "node-llama-cpp": "^3.4.1",
+    "postcss": "^8.4.49",
+    "react-icons": "^5.4.0",
+    "react-pageflip": "^2.0.3",
+    "react-router-dom": "^7.1.1",
+    "tailwindcss": "^3.4.17",
+    "typescript": "~5.6.2",
+    "typescript-eslint": "^8.18.1",
+    "vite-plugin-electron-renderer": "^0.14.6",
+    "zustand": "^5.0.2"
+  }
+}

@@ -1,0 +1,105 @@
+# AI Programming Tools - DO NOT COMMIT
+.claude/
+**/.claude/
+.cursor/
+**/.cursor/
+CLAUDE.md
+*claude*
+*cursor*
+*ai-*
+*AI-*
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+venvs/
+.venv/
+venv-unified/
+env/
+.env/
+*.spec
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build artifacts
+build/
+dist/
+dist-electron/
+dist-unified/
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Model files and large data (too big for GitHub)
+Data/chatterbox_models/
+Data/whisperx_models/
+*.safetensors
+*.pth
+*.bin
+*.pt
+
+# Virtual environments and Python cache
+venv*/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Temporary and test files
+*.tmp
+*.temp
+*.log
+test_*
+*_test*
+*_out/
+output_*/
+temp/
+tmp/
+*.xml
+nuitka-crash-report.xml
+
+# Deployment and binary files
+deploy-*/
+**/bin/
+*.zip
+*.7z
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# Third-party source code (should be managed separately)
+whisperX-3.4.2/
+markitdown-source/
+chatterbox/src/chatterbox/
+
+# Personal files
+*.docx
+*.wav
+output.wav
+speed_adjusted_sample.wav
+
+# Image directories (if not essential)
+image/

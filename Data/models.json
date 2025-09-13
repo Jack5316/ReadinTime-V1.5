@@ -1,0 +1,36 @@
+{
+  "chatterbox": {
+    "device": "cpu",
+    "source": "bundled",
+    "bundled_dir": "chatterbox_models/models--ResembleAI--chatterbox/snapshots/c819eeccdf99310da26bca3bc5ace120db93471a",
+    "hf_repo": "ResembleAI/chatterbox",
+    "target_sr": 24000,
+    "description": "TTS model with voice cloning support",
+    "required_files": [
+      "ve.safetensors",
+      "s3gen.safetensors", 
+      "tokenizer.json",
+      "conds.pt"
+    ],
+    "optional_files": [
+      "t3_cfg.safetensors"
+    ],
+    "version": "1b475dffa71fb191cb6d5901215eb6f55635a9b6",
+    "last_updated": "2024-12-10"
+  },
+  "whisperx": {
+    "asr_model": "small",
+    "device": "cpu",
+    "compute_type": "int8",
+    "align": true,
+    "batch_size": 4,
+    "models_dir": "whisperx_models",
+    "description": "WhisperX ASR model for speech recognition with diarization",
+    "required_files": [
+      "config.json",
+      "model.bin",
+      "tokenizer.json",
+      "vocabulary.txt"
+    ]
+  }
+}
